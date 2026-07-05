@@ -57,7 +57,9 @@ Job Description:
 Resume:
 {resume_text}
 
-Provide a match score between 0.0 and 1.0 (where 1.0 is a perfect match). Also provide a list of up to 3 brief reasons why they match (e.g. "Strong Python experience", "Missing cloud skills")."""
+Provide a match score between 0.0 and 1.0 (where 1.0 is a perfect match). 
+Evaluate how well the candidate's skills, experience, and projects match the specific requirements of the job description. Pay close attention to required skills versus nice-to-haves.
+Also provide a list of up to 3 brief reasons why they match or don't match (e.g. "Strong Python experience", "Missing cloud skills")."""
 
         response = client.models.generate_content(
             model='gemini-2.5-flash',
@@ -69,7 +71,10 @@ Provide a match score between 0.0 and 1.0 (where 1.0 is a perfect match). Also p
         )
         
         result = json.loads(response.text)
-        return float(result.get("match_score", 0.0)), result.get("reasons", [])
+        score = float(result.get("match_score", 0.0))
+        if score > 1.0:
+            score = score / 100.0
+        return min(score, 1.0), result.get("reasons", [])
     except Exception as e:
         print(f"Gemini Screening Error: {e}")
         return 0.0, ["Error during screening"]

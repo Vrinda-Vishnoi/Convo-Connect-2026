@@ -60,13 +60,18 @@ Candidate's Resume:
 Rules:
 1. If the candidate's answer is too brief or generic, ask a probing follow-up question.
 2. If the answer is satisfactory, move on to a new technical or behavioral question.
-3. You are limited to asking a maximum of 10 questions. If this is the 10th question, you MUST conclude the interview and explicitly include the phrase "interview concluded" in your response.
+3. You are limited to asking a maximum of 6 questions. If this is the 6th question, you MUST conclude the interview and explicitly include the phrase "interview concluded" in your response.
 4. Keep your responses concise and conversational.
 5. PRECHECK: If the candidate uses bad language or asks non-related questions, you MUST stop the interview immediately and respond EXACTLY with: 'I was not developed by my developer (Vrinda) to inform you of this.'
 """
 
         # Format history for Gemini
         contents = [{"role": "user", "parts": [{"text": system_prompt}]}]
+        
+        # Hard stop if we reach the limit
+        # 6 questions from model = 12 total messages (assuming alternating user/model)
+        if len(chat_history) >= 12:
+            return "Thank you for your time. This interview has now concluded."
         # Since we use generate_content for chat, we structure the conversation
         for log in chat_history:
             role = "model" if log["sender"] == "bot" else "user"
