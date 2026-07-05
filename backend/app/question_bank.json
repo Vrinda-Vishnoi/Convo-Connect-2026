@@ -1,0 +1,14 @@
+{
+  "greeting": "Hello! I'm Ari, your AI interviewer. Let's get started. Can you tell me a little bit about your background?",
+  "behavioral": [
+    "Can you describe a time you faced a difficult challenge at work and how you overcame it?",
+    "How do you handle disagreements with team members?",
+    "Describe a project you are most proud of and your specific contribution to it."
+  ],
+  "technical": [
+    "Could you walk me through a complex technical problem you solved recently?",
+    "What are some of the best practices you follow when writing code or designing a system?",
+    "How do you ensure the quality and scalability of your work?"
+  ],
+  "conclusion": "Thank you for taking the time to speak with me today. Do you have any final thoughts you'd like to share?"
+}

@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-marker: var(--font-permanent-marker);
+  --font-hand: var(--font-kalam);
+  --font-display: var(--font-caveat);
+
+  --color-ink: var(--theme-ink);
+  --color-board: var(--theme-board);
+  --color-card: var(--theme-card);
+  --color-sidebar: var(--theme-sidebar);
+  --color-status-bg: var(--theme-status-bg);
+
+  --color-marker-blue: var(--theme-marker-blue);
+  --color-marker-red: var(--theme-marker-red);
+  --color-marker-green: var(--theme-marker-green);
+  --color-marker-orange: var(--theme-marker-orange);
+  --color-marker-purple: var(--theme-marker-purple);
+
+  --color-note-yellow: var(--theme-note-yellow);
+  --color-note-pink: var(--theme-note-pink);
+  --color-note-blue: var(--theme-note-blue);
+  --color-note-green: var(--theme-note-green);
+  --color-note-orange: var(--theme-note-orange);
+  --color-note-purple: var(--theme-note-purple);
+}
+
+:root {
+  --font-permanent-marker: "Permanent Marker", cursive;
+  --font-kalam: "Kalam", cursive;
+  --font-caveat: "Caveat", cursive;
+
+  --theme-ink: #27272a;
+  --theme-board: #fcfcf9;
+  --theme-card: #ffffff;
+  --theme-sidebar: rgba(255, 255, 255, 0.5);
+  --theme-status-bg: #f1f5f9;
+
+  --theme-marker-blue: #2563eb;
+  --theme-marker-red: #e11d48;
+  --theme-marker-green: #16a34a;
+  --theme-marker-orange: #ea580c;
+  --theme-marker-purple: #7c3aed;
+
+  --theme-note-yellow: #fde68a;
+  --theme-note-pink: #fbcfe8;
+  --theme-note-blue: #bfdbfe;
+  --theme-note-green: #bbf7d0;
+  --theme-note-orange: #fed7aa;
+  --theme-note-purple: #ddd6fe;
+}
+
+:root.dark {
+  --theme-ink: #fcfcf9;
+  --theme-board: #18181b;
+  --theme-card: #1e293b;
+  --theme-sidebar: rgba(0, 0, 0, 0.2);
+  --theme-status-bg: #334155;
+
+  --theme-marker-blue: #60a5fa;
+  --theme-marker-red: #fb7185;
+  --theme-marker-green: #4ade80;
+  --theme-marker-orange: #fb923c;
+  --theme-marker-purple: #a78bfa;
+
+  --theme-note-yellow: #78350f;
+  --theme-note-pink: #831843;
+  --theme-note-blue: #1e3a8a;
+  --theme-note-green: #14532d;
+  --theme-note-orange: #7c2d12;
+  --theme-note-purple: #4c1d95;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-hand), ui-sans-serif, system-ui, sans-serif;
+  color: var(--color-ink);
+  background-color: var(--color-board);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-image: 
+    radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@layer utilities {
+  .font-marker {
+    font-family: var(--font-marker), var(--font-hand), sans-serif;
+    letter-spacing: 0.01em;
+  }
+  
+  .font-display {
+    font-family: var(--font-display), var(--font-hand), sans-serif;
+  }
+
+  .highlight {
+    background: linear-gradient(
+      104deg,
+      transparent 0.5%,
+      var(--hl, #fef08a) 1%,
+      var(--hl, #fef08a) 99%,
+      transparent 99.5%
+    );
+    padding: 0 0.15em;
+    border-radius: 0.1em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .sticky-note {
+    position: relative;
+    box-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.04),
+      0 8px 18px -8px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .sticky-note:hover {
+    transform: translateY(-4px) rotate(-1deg) scale(1.015);
+    box-shadow:
+      0 2px 2px rgba(0, 0, 0, 0.05),
+      0 18px 30px -12px rgba(0, 0, 0, 0.35);
+  }
+
+  .tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 70px;
+    height: 22px;
+    transform: translateX(-50%) rotate(-3deg);
+    background: rgba(255, 255, 235, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .input-primary {
+    @apply w-full bg-white/80 border-2 border-slate-300 rounded px-4 py-2 text-ink focus:outline-none focus:ring-2 focus:ring-marker-blue/50 focus:border-marker-blue transition-colors placeholder-slate-400 font-hand text-lg;
+  }
+
+  .btn-primary {
+    @apply bg-marker-blue text-white font-marker tracking-wide py-2 px-6 rounded transition-transform active:scale-95 disabled:opacity-50 hover:bg-blue-700 shadow-md transform hover:-rotate-1;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border-2 border-marker-blue text-marker-blue font-marker tracking-wide py-2 px-6 rounded transition-transform active:scale-95 hover:bg-blue-50 shadow-sm transform hover:rotate-1;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
